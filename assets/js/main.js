@@ -21,14 +21,37 @@ const gatherData = () => {
                 }
             });
 
-            buildPage();
+            buildPage(sessions, students);
         })
     })
 }
 
-const buildPage = () => {
-    console.log(sessions);
-    console.log(students);
+const buildPage = (sessions, students) => {
+
+    document.getElementById("totalSessions").innerHTML = sessions.length;
+
+    var studentsPerBootcamp = [
+        students.filter(s => s.bootcamp == "DATA").length,
+        students.filter(s => s.bootcamp != "DATA").length
+    ]
+    
+    var studentsPerBootcamp_data = [{
+        values: studentsPerBootcamp,
+        labels: ["Data", "Full-Stack"],
+        hoverinfo: 'label+percent',
+        type: 'pie'
+      }];
+      
+    var studentsPerBootcamp_layout = {
+        title: "Students Per Bootcamp"
+    };
+
+    var plotlyResponsive = {responsive: true}
+      
+    Plotly.newPlot('studentsPie', studentsPerBootcamp_data, studentsPerBootcamp_layout, plotlyResponsive);
+
+    
+    
 }
 
 gatherData();
