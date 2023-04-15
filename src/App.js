@@ -1,13 +1,21 @@
 import * as d3 from "d3";
 import { useEffect, useState } from "react";
+
+import Dropdown from "./components/Dropdown";
+
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
 import Pie from "./components/graphs/Pie";
+
 
 import csvData from "./data/clean/full.csv";
 
 function App() {
   const [load, setLoad] = useState(false);
+  
+  const [currBootcamp, setCurrBootcamp] = useState("ALL");
+  const [allBootcamps, setAllBootcamps] = useState(["ALL"]);
+
   const [data, setData] = useState([]);
   const [totalWeekDurationData, setTotalWeekDurationData] = useState({});
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
@@ -42,12 +50,19 @@ function App() {
       setTotalWeekDurationData(dateDuration);
       setTotalWeekCountData(dateCount);
       setBootcampCountData(bootcampCount);
+      setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
       setLoad(true);
     })
   }, [])
 
   return load ? (
     <div className="App">
+      <Dropdown
+      selected={currBootcamp}
+      options={allBootcamps}
+      setValue={setCurrBootcamp}
+      />
+
       <Line
       x={Object.entries(totalWeekCountData).map(d => d[0])}
       y={Object.entries(totalWeekCountData).map(d => d[1])}
