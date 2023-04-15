@@ -1,6 +1,7 @@
 import {useState} from "react";
 
 import Checkbox from "./Checkbox";
+import translateTopic from "../../utils/translateTopic";
 
 import style from './multiselect.module.css';
 
@@ -13,7 +14,7 @@ const Multiselect = ({selected, options, setValue}) => {
 
     const selectOption = (option) => {
         if (selected.indexOf(option) == -1){
-            setValue([...selected, option]);
+            setValue(selected.length > 0 ? [...selected, option] : [option]);
             setIsOpen(false);
         } else {
             setValue(selected.filter(s => s != option));
@@ -50,7 +51,7 @@ const Multiselect = ({selected, options, setValue}) => {
                         <Checkbox
                         key={idx}
                         selected={selected.indexOf(o) != -1}
-                        label={o} 
+                        label={translateTopic(o)} 
                         setValue={(e) => selectOption(o)}
                         />
                     )

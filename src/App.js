@@ -57,6 +57,9 @@ function App() {
       }
     })
 
+    console.log(topicCount);
+
+    console.log(rawData.filter(d => !d.TOPIC));
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
     setBootcampCountData(bootcampCount);
@@ -113,22 +116,21 @@ function App() {
         </div>
       </div>
       
-
-      <Line
-      x={Object.entries(totalWeekCountData).map(d => d[0])}
-      y={Object.entries(totalWeekCountData).map(d => d[1])}
-      title="Number of Tutoring Sessions per Day"
-      />
-      <Line
-      x={Object.entries(totalWeekDurationData).map(d => d[0])}
-      y={Object.entries(totalWeekDurationData).map(d => parseInt(d[1]) / 60)}
-      title="Duration of Tutoring Sessions per Day (Hours)"
-      />
-      <Pie
-      x={Object.entries(bootcampCountData).map(d => d[0])}
-      y={Object.entries(bootcampCountData).map(d => parseInt(d[1]) / 60)}
-      title="Number of Sessions per bootcamp"
-      />
+      <div style={{marginTop: "50px"}}>
+        <div>
+          
+        </div>
+        <Line
+        x={Object.entries(totalWeekCountData).map(d => d[0])}
+        y={Object.entries(totalWeekCountData).map(d => d[1])}
+        title="Number of Tutoring Sessions per Day"
+        />
+        <Pie
+        x={Object.entries(bootcampCountData).map(d => d[0])}
+        y={Object.entries(bootcampCountData).map(d => parseInt(d[1]) / 60)}
+        title="Number of Sessions per bootcamp"
+        />
+      </div>
     </div>
   ) : (
     <div className="App">

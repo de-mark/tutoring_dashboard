@@ -11,7 +11,11 @@ const Pie = ({x, y, title}) => {
                     }
                 ]}
             layout={{
-                title: title
+                title: `<b>${title}</b>`,
+                font: {
+                    family: `'Martian Mono', monospace`,
+                    size: "1rem"
+                },
             }}
             responsive={true}
         />

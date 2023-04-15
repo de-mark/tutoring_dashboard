@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.container p {
+    font-size: 10px;
+}
+
 .checked, .empty {
     display: block;
     width: 10px;
