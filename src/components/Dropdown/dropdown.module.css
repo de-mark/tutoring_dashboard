@@ -1,7 +1,46 @@
+.container {
+    width: 100%;
+}
+
+.container:hover {
+    cursor: pointer;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    color: black;
+    font-size: .8rem;
+}
+
+.top:hover .arrow, .arrow:hover {
+    animation: arrowMove 1s infinite alternate;
+}
+
+
 .open {
     display: block;
 }
 
 .closed {
     display: none;
+}
+
+/*
+---------------------------------------------
+ANIMATIONS
+---------------------------------------------
+*/
+
+@keyframes arrowMove {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
 }

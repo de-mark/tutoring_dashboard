@@ -14,9 +14,14 @@ const Dropdown = ({selected, options, setValue}) => {
     }
 
     return (
-        <div>
-            <div onClick={toggleOpen}>
-                {selected}
+        <div className={style.container}>
+            <div className={style.top} onClick={toggleOpen}>
+                <div>
+                    {selected}
+                </div>
+                <div className={isOpen ? "" : style.arrow}>
+                    {isOpen ? "" : "⮟"}
+                </div>
             </div>
             <div className={isOpen ? style.open : style.closed}>
                 {options.map((o, idx) => {

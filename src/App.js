@@ -17,43 +17,60 @@ function App() {
   const [allBootcamps, setAllBootcamps] = useState(["ALL"]);
 
   const [data, setData] = useState([]);
+
   const [totalWeekDurationData, setTotalWeekDurationData] = useState({});
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
   const [bootcampCountData, setBootcampCountData] = useState([])
 
+  const calculateData = (rawData) => {
+    let dateDuration = {}
+    let dateCount = {}
+    let bootcampCount = {}
+
+    rawData.forEach((d) => {
+      if (d.DATE in dateDuration){
+        dateDuration[d.DATE] += parseInt(d.DURATION);
+      } else {
+        dateDuration[d.DATE] = parseInt(d.DURATION);
+      }
+      if (d.DATE in dateCount){
+        dateCount[d.DATE]++;
+      } else {
+        dateCount[d.DATE] = 1;
+      }
+      if (d.BOOTCAMP in bootcampCount) {
+        bootcampCount[d.BOOTCAMP]++;
+      } else {
+        bootcampCount[d.BOOTCAMP] = 1;
+      }
+    })
+
+    setTotalWeekDurationData(dateDuration);
+    setTotalWeekCountData(dateCount);
+    setBootcampCountData(bootcampCount);
+    if (!load) {
+      setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
+    }
+  }
+
   useEffect(() => {
     d3.csv(csvData).then(rawData => {
       setData(rawData);
-
-      let dateDuration = {}
-      let dateCount = {}
-      let bootcampCount = {}
-
-      rawData.forEach((d) => {
-        if (d.DATE in dateDuration){
-          dateDuration[d.DATE] += parseInt(d.DURATION);
-        } else {
-          dateDuration[d.DATE] = parseInt(d.DURATION);
-        }
-        if (d.DATE in dateCount){
-          dateCount[d.DATE]++;
-        } else {
-          dateCount[d.DATE] = 1;
-        }
-        if (d.BOOTCAMP in bootcampCount) {
-          bootcampCount[d.BOOTCAMP]++;
-        } else {
-          bootcampCount[d.BOOTCAMP] = 1;
-        }
-      })
-
-      setTotalWeekDurationData(dateDuration);
-      setTotalWeekCountData(dateCount);
-      setBootcampCountData(bootcampCount);
-      setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
+      calculateData(rawData);
       setLoad(true);
     })
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (load) {
+      if (currBootcamp == "ALL") {
+        calculateData(data);
+      } else {
+        let filteredData = data.filter(d => d.BOOTCAMP == currBootcamp);
+        calculateData(filteredData)
+      }
+    }
+  }, [currBootcamp])
 
   return load ? (
     <div className="App">
