@@ -50,8 +50,32 @@ const buildPage = (sessions, students) => {
       
     Plotly.newPlot('studentsPie', studentsPerBootcamp_data, studentsPerBootcamp_layout, plotlyResponsive);
 
+    //----------------
+    var sessionsPerBootcamp = [
+        sessions.filter(sess => {
+            console.log(sess.id)
+            console.log(students.map(s => s.id).sort((a,b) => a - b))
+            console.log(sessions.map(s=>s.id).sort((a,b)=> a-b))
+            let resp = students.filter(stu => stu.id == sess.id);
+            console.log(resp) 
+            resp[0].BOOTCAMP == "DATA"
+        }).length,
+        sessions.filter(sess => students.filter( stu => stu.id == sess.id)[0].BOOTCAMP != "DATA").length
+    ]
     
-    
+    var sessionsPerBootcamp_data = [{
+        values: sessionsPerBootcamp,
+        labels: ["Data", "Full-Stack"],
+        hoverinfo: 'label+percent',
+        type: 'pie'
+      }];
+      
+    var sessionsPerBootcamp_layout = {
+        title: "Session Per Bootcamp"
+    };
+      
+    Plotly.newPlot('sessionsPie', sessionsPerBootcamp_data, sessionsPerBootcamp_layout, plotlyResponsive);
+
 }
 
 gatherData();
