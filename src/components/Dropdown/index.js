@@ -26,7 +26,7 @@ const Dropdown = ({selected, options, setValue}) => {
             <div className={isOpen ? style.open : style.closed}>
                 {options.map((o, idx) => {
                     return (
-                        <p onClick={(e) => selectOption(o)}>
+                        <p key={idx} onClick={(e) => selectOption(o)}>
                             {o}
                         </p>
                     )

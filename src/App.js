@@ -22,21 +22,51 @@ function App() {
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
   const [bootcampCountData, setBootcampCountData] = useState([])
 
+  const sortDictionary = (dict) => {
+    let keys = Object.keys(dict).sort((a, b) => {
+      let aDate = new Date(a), bDate = new Date(b);
+      
+      if (aDate < bDate) {
+        return -1;
+      } else if (aDate > bDate) {
+        return +1;
+      } else {
+        return 0;
+      }
+    });
+
+    var res = {};
+
+    for (let i = 0; i < keys.length; i++){
+      res[keys[i]] = dict[keys[i]];
+      delete dict[keys[i]];
+    }
+
+    for (let i = 0; i < keys.length; i++) {
+      dict[keys[i]] = res[keys[i]];
+    }
+
+    return dict;
+  }
+
   const calculateData = (rawData) => {
     let dateDuration = {}
     let dateCount = {}
     let bootcampCount = {}
 
+    console.log(rawData)
+
     rawData.forEach((d) => {
-      if (d.DATE in dateDuration){
-        dateDuration[d.DATE] += parseInt(d.DURATION);
+      let convertedDate = `${d.DATE.getFullYear()}-${d.DATE.getMonth() + 1}-${d.DATE.getDate()}`
+      if (convertedDate in dateDuration){
+        dateDuration[convertedDate] += parseInt(d.DURATION);
       } else {
-        dateDuration[d.DATE] = parseInt(d.DURATION);
+        dateDuration[convertedDate] = parseInt(d.DURATION);
       }
-      if (d.DATE in dateCount){
-        dateCount[d.DATE]++;
+      if (convertedDate in dateCount){
+        dateCount[convertedDate]++;
       } else {
-        dateCount[d.DATE] = 1;
+        dateCount[convertedDate] = 1;
       }
       if (d.BOOTCAMP in bootcampCount) {
         bootcampCount[d.BOOTCAMP]++;
@@ -45,8 +75,8 @@ function App() {
       }
     })
 
-    setTotalWeekDurationData(dateDuration);
-    setTotalWeekCountData(dateCount);
+    setTotalWeekDurationData(sortDictionary(dateDuration));
+    setTotalWeekCountData(sortDictionary(dateCount));
     setBootcampCountData(bootcampCount);
     if (!load) {
       setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
@@ -55,8 +85,14 @@ function App() {
 
   useEffect(() => {
     d3.csv(csvData).then(rawData => {
-      setData(rawData);
-      calculateData(rawData);
+      let parsedData = rawData.map(d => {
+        d.START = new Date(d.START);
+        d.END = new Date(d.END);
+        d.DATE = new Date(d.DATE);
+        return d;
+      })
+      setData(parsedData);
+      calculateData(parsedData);
       setLoad(true);
     })
   }, []);
