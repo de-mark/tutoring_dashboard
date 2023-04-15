@@ -1,21 +1,8 @@
 import Plot from 'react-plotly.js';
 
+import getMedian from "../../../utils/getMedian";
+
 const Line = ({x, y, title}) => {
-    const getMedian = (values) => {
-        values.sort((a,b) => a-b);
-
-        let mid = Math.floor(values.length / 2);
-
-        if (values.length % 2 == 0) {
-            console.log(values[mid])
-            return values[mid];
-        } else {
-            console.log(values[mid-1], values[mid])
-            console.log((values[mid - 1] + values[mid]) / 2.0)
-            return (values[mid - 1] + values[mid]) / 2.0;
-        }
-    };
-
     return (
         <Plot
             data={[

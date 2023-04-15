@@ -1,0 +1,22 @@
+.container {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checked, .empty {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px grey solid;
+}
+
+.empty {
+    background-color: grey;
+}
+
+.checked {
+    background-color: black;
+}

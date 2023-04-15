@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import { useEffect, useState } from "react";
 
 import Dropdown from "./components/Dropdown";
+import Multiselect from "./components/Multiselect";
 
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
@@ -9,6 +10,7 @@ import Pie from "./components/graphs/Pie";
 
 
 import csvData from "./data/clean/full.csv";
+import sortObjects from "./utils/sortObject";
 
 function App() {
   const [load, setLoad] = useState(false);
@@ -16,45 +18,20 @@ function App() {
   const [currBootcamp, setCurrBootcamp] = useState("ALL");
   const [allBootcamps, setAllBootcamps] = useState(["ALL"]);
 
+  const [currTopic, setCurrTopic] = useState([]);
+  const [allTopics, setAllTopics] = useState([]);
+
   const [data, setData] = useState([]);
 
   const [totalWeekDurationData, setTotalWeekDurationData] = useState({});
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
   const [bootcampCountData, setBootcampCountData] = useState([])
 
-  const sortDictionary = (dict) => {
-    let keys = Object.keys(dict).sort((a, b) => {
-      let aDate = new Date(a), bDate = new Date(b);
-      
-      if (aDate < bDate) {
-        return -1;
-      } else if (aDate > bDate) {
-        return +1;
-      } else {
-        return 0;
-      }
-    });
-
-    var res = {};
-
-    for (let i = 0; i < keys.length; i++){
-      res[keys[i]] = dict[keys[i]];
-      delete dict[keys[i]];
-    }
-
-    for (let i = 0; i < keys.length; i++) {
-      dict[keys[i]] = res[keys[i]];
-    }
-
-    return dict;
-  }
-
   const calculateData = (rawData) => {
     let dateDuration = {}
     let dateCount = {}
     let bootcampCount = {}
-
-    console.log(rawData)
+    let topicCount = {}
 
     rawData.forEach((d) => {
       let convertedDate = `${d.DATE.getFullYear()}-${d.DATE.getMonth() + 1}-${d.DATE.getDate()}`
@@ -73,11 +50,18 @@ function App() {
       } else {
         bootcampCount[d.BOOTCAMP] = 1;
       }
+      if (d.TOPIC in topicCount){
+        topicCount[d.TOPIC]++;
+      } else {
+        topicCount[d.TOPIC] = 1;
+      }
     })
 
-    setTotalWeekDurationData(sortDictionary(dateDuration));
-    setTotalWeekCountData(sortDictionary(dateCount));
+    setTotalWeekDurationData(sortObjects(dateDuration));
+    setTotalWeekCountData(sortObjects(dateCount));
     setBootcampCountData(bootcampCount);
+    setAllTopics([...Object.keys(topicCount)])
+
     if (!load) {
       setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
     }
@@ -110,11 +94,25 @@ function App() {
 
   return load ? (
     <div className="App">
-      <Dropdown
-      selected={currBootcamp}
-      options={allBootcamps}
-      setValue={setCurrBootcamp}
-      />
+      <div style={{display: "flex", justifyContent: "space-evenly", alignContent: "center"}}>
+        <div style={{width: "30%"}}>
+          <h4>Bootcamp</h4>
+          <Dropdown
+          selected={currBootcamp}
+          options={allBootcamps}
+          setValue={setCurrBootcamp}
+          />
+        </div>
+        <div style={{width: "30%"}}>
+          <h4>Topic</h4>
+          <Multiselect
+          selected={currTopic} 
+          options={allTopics}
+          setValue={setCurrTopic}
+          />
+        </div>
+      </div>
+      
 
       <Line
       x={Object.entries(totalWeekCountData).map(d => d[0])}
