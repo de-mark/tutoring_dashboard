@@ -80,8 +80,7 @@ const Line = ({x, y, title}) => {
                 }
             }}
             useResizeHandler={true}
-            style={{width:"100%", height:"100%"}}
-            // responsive={true}
+            style={{width:"95%", height:"95%", margin: "0 auto"}}
         />
     )
 }

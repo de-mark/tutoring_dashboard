@@ -120,7 +120,7 @@ function App() {
       setCurrTopic={setCurrTopic}
       />
       
-      <div style={{display: "flex", justifyContent: "space-evenly", alignItems:"center", textAlign:"center", marginTop: "50px", width: "100%"}}>
+      <div style={{display: "flex", justifyContent: "space-evenly", alignItems:"center", textAlign:"center", marginTop: "30px", width: "100%"}}>
         <Summary
         bootcamp={currBootcamp}
         totalStudents={Object.keys(countStudents).length}
@@ -133,7 +133,7 @@ function App() {
         title="Number of Sessions Held Per Topic"
         />
       </div>
-      <div style={{width: "100%"}}>
+      <div style={{width: "100%", textAlign: "center"}}>
         <Line
         x={Object.entries(totalWeekCountData).map(d => d[0])}
         y={Object.entries(totalWeekCountData).map(d => d[1])}

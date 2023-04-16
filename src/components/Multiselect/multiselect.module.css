@@ -37,6 +37,7 @@
 }
 
 .options {
+    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -45,6 +46,7 @@
 
 
 .optionsContainer {
+    padding-top: 5px;
     width: 100%;
     display: flex;
     justify-content: space-between;
