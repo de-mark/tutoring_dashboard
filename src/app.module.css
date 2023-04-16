@@ -1,0 +1,51 @@
+.dashTopRow {
+    width: 100%;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-evenly; 
+    align-items: center; 
+    text-align: center;
+    margin-top: 30px; 
+}
+
+.summaryContainer {
+    width: 20%;
+}
+
+.barChart {
+    width: 75%;
+}
+
+@media screen and (max-width: 1300px) {
+    .summaryContainer {
+        width: 30%;
+    }
+    
+    .barChart {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .dashTopRow {
+        width: 100%;
+        display: block;  
+        text-align: center;
+        margin-top: 60px; 
+    }
+
+    .summaryContainer {
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+    .barChart {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .dashTopRow {
+        margin-top: 90px; 
+    }
+}

@@ -37,3 +37,15 @@
 .checked {
     background-color: black;
 }
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .container p {
+        font-size: .65rem;
+    }
+}

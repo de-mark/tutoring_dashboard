@@ -16,6 +16,8 @@ import translateTopic from "./utils/translateTopic";
 // Data
 import csvData from "./data/clean/full.csv";
 
+import style from "./app.module.css";
+
 
 function App() {
   const [load, setLoad] = useState(false);
@@ -120,8 +122,8 @@ function App() {
       setCurrTopic={setCurrTopic}
       />
       
-      <div style={{display: "flex", justifyContent: "space-evenly", alignItems:"center", textAlign:"center", marginTop: "30px", width: "100%"}}>
-        <div style={{width: "20%"}}>
+      <div className={style.dashTopRow}>
+        <div className={style.summaryContainer}>
           <Summary
           bootcamp={currBootcamp}
           totalStudents={Object.keys(countStudents).length}
@@ -133,7 +135,7 @@ function App() {
           />
         </div>
         
-        <div style={{width: "75%"}}>
+        <div className={style.barChart}>
           <Bar
           x={Object.keys(filteredTopicCount).map((t) => translateTopic(t))}
           y={Object.values(filteredTopicCount)}

@@ -93,3 +93,41 @@
 .filterContainer img {
     height: 1rem;
 }
+
+@media screen and (max-width: 1000px) {
+    .options {
+        width: 100%;
+        padding: 5px 0;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .filterContainer p {
+        font-size: .75rem;
+    }
+    .clearContainer p {
+        font-size: .75rem;
+    }
+    .filterContainer img {
+        height: .85rem;
+    }
+    .clearContainer img {
+        height: .85rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .filterContainer p {
+        font-size: .55rem;
+    }
+    .clearContainer p {
+        font-size: .65rem;
+    }
+    .filterContainer img {
+        height: .55rem;
+    }
+    .clearContainer img {
+        height: .65rem;
+    }
+}
