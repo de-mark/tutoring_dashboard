@@ -15,7 +15,8 @@ import aggregateColumn from "./utils/aggregateColumn";
 
 function App() {
   const [load, setLoad] = useState(false);
-  
+  const [data, setData] = useState([]);
+
   const [currBootcamp, setCurrBootcamp] = useState("ALL");
   const [allBootcamps, setAllBootcamps] = useState(["ALL"]);
 
@@ -23,25 +24,28 @@ function App() {
   const [allTopics, setAllTopics] = useState([]);
   const [filteredTopicCount, setFilteredTopicCount] = useState({});
 
-  const [data, setData] = useState([]);
-
   const [totalWeekDurationData, setTotalWeekDurationData] = useState({});
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
   const [bootcampCountData, setBootcampCountData] = useState([])
+  const [countStudents, setCountSudents] = useState([]);
 
   const calculateData = (rawData) => {
     let dateDuration = aggregateColumn(rawData, "DATE", "sum", "DURATION");
     let dateCount = aggregateColumn(rawData, "DATE", "count");
     let bootcampCount = aggregateColumn(rawData, "BOOTCAMP", "count");
     let topicCount = aggregateColumn(rawData, "TOPIC", "count");
+    let studentCount = aggregateColumn(rawData, "ID", "count");
 
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
     setBootcampCountData(bootcampCount);
     setAllTopics([...Object.keys(topicCount)]);
     setFilteredTopicCount(topicCount);
+    setCountSudents(studentCount);
 
     if (!load) {
+      // If this is the initial calculate data, we set the bootcamps for
+      // the dropdown.
       setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
     }
   }
@@ -91,6 +95,7 @@ function App() {
         currData = data.filter(d => d.BOOTCAMP == currBootcamp);
       }
 
+      // It could be that 
       if (currTopic.length == 0) {
         calculateData(currData);
       } else {
@@ -114,24 +119,24 @@ function App() {
       
       <div style={{marginTop: "50px"}}>
         <Summary
+        bootcamp={currBootcamp}
+        totalStudents={Object.keys(countStudents).length}
+        totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
         />
-        <Line
-        x={Object.entries(totalWeekCountData).map(d => d[0])}
-        y={Object.entries(totalWeekCountData).map(d => d[1])}
-        title="Number of Tutoring Sessions per Day"
-        />
-        {/* <Pie
-        x={Object.entries(bootcampCountData).map(d => d[0])}
-        y={Object.entries(bootcampCountData).map(d => parseInt(d[1]) / 60)}
-        title="Number of Sessions per bootcamp"
-        /> */}
-      </div>
-      <div>
+        
         <Bar
         x={Object.keys(filteredTopicCount)}
         y={Object.values(filteredTopicCount)}
         title="Number of Sessions Held Per Topic"
         />
+      </div>
+      <div>
+        <Line
+        x={Object.entries(totalWeekCountData).map(d => d[0])}
+        y={Object.entries(totalWeekCountData).map(d => d[1])}
+        title="Number of Tutoring Sessions per Day"
+        />
+        
       </div>
     </div>
   ) : (

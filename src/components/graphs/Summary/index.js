@@ -1,9 +1,9 @@
-const Summary = ({ bootcamp, duration, numSessions, topics }) => {
+const Summary = ({ bootcamp, totalStudents, totalSessions }) => {
     return (
         <div>
-            <p>Bootcamp</p>
-            <p>Total Students (Actual Total Students)</p>
-            <p>Total Sessions</p>
+            <p><b>{bootcamp}</b> Bootcamp{bootcamp == "ALL" ? "s" : ""}</p>
+            <p><b>Total Students</b> {totalStudents.toLocaleString()}</p>
+            <p><b>Total Sessions</b> {totalSessions.toLocaleString()}</p>
             <p>Median Sessions per Week</p>
             <p>Median Sessions per Student</p>
             
