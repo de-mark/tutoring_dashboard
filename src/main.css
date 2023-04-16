@@ -10,6 +10,7 @@
     font-family: var(--main-font-fam);
     font-size: var(--main-font-size);
     box-sizing: border-box;
+    margin: 0;
 }
 
 

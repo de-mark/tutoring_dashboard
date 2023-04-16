@@ -34,6 +34,9 @@ const Filter = ({currBootcamp, allBootcamps, setCurrBootcamp,
                 />
                 </div>
             </div>
+            <div className={style.bottomContainer}>
+                <p className={style.pullUpArrow} onClick={toggle}>▲</p>
+            </div>
         </div>
     ) : (
         <div className={style.outerContainer} onClick={toggle}>

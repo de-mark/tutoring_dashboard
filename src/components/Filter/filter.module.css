@@ -3,6 +3,7 @@
     position: fixed;
     top: 0;
     z-index: 3;
+    align-items: bottom;
     background-color: rgba(255,255,255,.85);
 }
 
@@ -22,5 +23,15 @@
 .innerContainer {
     display: flex; 
     justify-content: space-evenly; 
-    align-items: center;
+    align-items: bottom;
+}
+
+.bottomContainer {
+    display:block;
+    text-align: center;
+}
+
+.pullUpArrow:hover {
+    cursor: pointer;
+    animation: var(--arrow-animation);
 }
