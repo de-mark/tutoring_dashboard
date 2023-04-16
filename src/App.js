@@ -126,12 +126,13 @@ function App() {
         totalStudents={Object.keys(countStudents).length}
         totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
         />
-        
-        <Bar
-        x={Object.keys(filteredTopicCount)}
-        y={Object.values(filteredTopicCount)}
-        title="Number of Sessions Held Per Topic"
-        />
+        <div style={{width: "75%"}}>
+          <Bar
+          x={Object.keys(filteredTopicCount)}
+          y={Object.values(filteredTopicCount)}
+          title="Number of Sessions Held Per Topic"
+          />
+        </div>
       </div>
       <div style={{width: "100%", textAlign: "center"}}>
         <Line

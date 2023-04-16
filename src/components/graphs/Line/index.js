@@ -11,15 +11,26 @@ const Line = ({x, y, title}) => {
                         y: y,
                         type: 'scatter',
                         fill: 'tozeroy',
-                        hoveron:'points+fills'
+                        mode: 'lines+markers',
+                        marker: {
+                            size: 4,
+                            color: 'rgba(233, 166, 166, .25)'
+                        },
+                        line: {
+                            color: "#864879"
+                        },
+                        hoveron:'points'
                     }
                 ]}
             layout={{
                 title: `<b>${title}</b>`,
                 responsive: true,
+                plot_bgcolor: 'rgba(0, 0, 0, 0)',
+                paper_bgcolor: 'rgba(0, 0, 0, 0)',
                 font: {
                     family: `'Space Grotesk', sans-serif`,
-                    size: "1rem"
+                    size: "1rem",
+                    color: "#E9A6A6"
                 },
                 shapes: [
                     {
@@ -29,14 +40,23 @@ const Line = ({x, y, title}) => {
                         y0: getMedian(y.slice()),
                         y1: getMedian(y.slice()),
                         line: {
-                            color: 'rgba(255, 0, 0, .6)',
+                            color: 'rgba(255, 95, 126,.9)',
                             width: 2,
                             dash: 'dot'
                         }
                     }
                 ],
-                xaxis: {
+                yaxis: {
                     autorange: true,
+                    title: 'Number of Sessions (Per Day)',
+                    gridcolor: 'rgba(0,0,0,.35)',
+                    gridwidth: 2
+                },
+                xaxis: {
+                    title: 'Day',
+                    autorange: true,
+                    showgrid: false,
+                    zeroline: false,
                     range: ['2021-01-1', '2023-12-31'],
                     rangeselector: {
                         buttons: [
