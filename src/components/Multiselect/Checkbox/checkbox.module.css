@@ -5,8 +5,18 @@
     align-items: center;
 }
 
+.container:hover {
+    font-weight: bolder;
+    background-color: lightgrey;
+}
+
+.container:hover .checked, .container:hover .empty {
+    background-color: black;
+    border: 2px black solid; 
+}
+
 .container p {
-    font-size: 10px;
+    font-size: .75rem;
 }
 
 .checked, .empty {
@@ -14,11 +24,11 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 2px grey solid;
+    border: 2px lightgrey solid;
 }
 
 .empty {
-    background-color: grey;
+    background-color: lightgrey;
 }
 
 .checked {

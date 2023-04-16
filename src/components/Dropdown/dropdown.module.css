@@ -2,9 +2,9 @@
     position: absolute;
     width: 35vw;
     z-index: 2;
-    background-color: rgba(255,255,255,.75);
-    padding: 10px;
-    box-shadow: 5px 10px rgba(0,0,0,.75);
+    background-color: rgba(255,255,255,.95);
+    padding: 15px;
+    box-shadow: .25rem .25rem rgba(0,0,0,.55);
     overflow: hidden;
 }
 
@@ -18,15 +18,23 @@
     align-items: center;
 }
 
-.arrow {
-    color: black;
-    font-size: .8rem;
+.arrow img {
+    height: 1rem;
 }
 
 .top:hover .arrow, .arrow:hover {
     animation: arrowMove 1s infinite alternate;
 }
 
+
+.open p, .closed p {
+    font-size: .75rem;
+}
+
+.open p:hover, .closed p:hover {
+    font-weight: bolder;
+    background-color: lightgrey;
+}
 
 .open {
     display: block;

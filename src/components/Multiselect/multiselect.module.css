@@ -2,9 +2,9 @@
     position: absolute;
     width: 35vw;
     z-index: 2;
-    background-color: rgba(255,255,255,.75);
-    padding: 10px;
-    box-shadow: 5px 10px rgba(0,0,0,.75);
+    background-color: rgba(255,255,255,.95);
+    padding: 15px;
+    box-shadow: .25rem .25rem rgba(0,0,0,.55);
     overflow: hidden;
 }
 
@@ -18,25 +18,74 @@
     align-items: center;
 }
 
-.arrow {
-    color: black;
-    font-size: .8rem;
+.arrow img {
+    height: 1rem;
 }
 
-.top:hover .arrow, .arrow:hover {
+.top:hover .arrow, 
+.arrow:hover, 
+.clearContainer:hover, 
+.filterContainer:hover {
     animation: arrowMove 1s infinite alternate;
 }
 
 
 .open {
+    display: block;
+}
+
+.closed {
+    display: none;
+}
+
+.options {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.closed {
-    display: none;
+
+.optionsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clearContainer {
+    width: 43%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.clearContainer p {
+    font-size: .85rem;
+    font-weight: bolder;
+    color: red;
+    margin-left: .85rem;    
+}
+
+.clearContainer img {
+    height: 1rem;
+}
+
+.filterContainer {
+    width: 43%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.filterContainer p {
+    font-size: .85rem;
+    font-weight: bolder;
+    margin-right: .85rem;    
+}
+
+.filterContainer img {
+    height: 1rem;
 }
 
 /*

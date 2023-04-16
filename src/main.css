@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
 
 :root {
-    --main-font-fam: 'Martian Mono', monospace; 
+    --main-font-fam: 'Space Grotesk', sans-serif; 
     --main-font-size: 16px;
 }
 

@@ -57,9 +57,6 @@ function App() {
       }
     })
 
-    console.log(topicCount);
-
-    console.log(rawData.filter(d => !d.TOPIC));
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
     setBootcampCountData(bootcampCount);
@@ -87,6 +84,7 @@ function App() {
   useEffect(() => {
     if (load) {
       if (currBootcamp == "ALL") {
+        setCurrTopic([]);
         calculateData(data);
       } else {
         let filteredData = data.filter(d => d.BOOTCAMP == currBootcamp);
@@ -94,6 +92,27 @@ function App() {
       }
     }
   }, [currBootcamp])
+
+  useEffect(() => {
+    if (load){
+      let currData;
+      if (currBootcamp == "ALL") {
+        currData = data;
+      } else {
+        currData = data.filter(d => d.BOOTCAMP == currBootcamp);
+      }
+
+      if (currTopic.length == 0) {
+        calculateData(currData);
+      } else {
+        let filteredData = currData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
+        // currTopic.forEach((topic) => {
+        //   filteredData = filteredData.filter(d => d.TOPIC == topic);
+        // });
+        calculateData(filteredData);
+      }
+    }
+  }, [currTopic]);
 
   return load ? (
     <div className="App">

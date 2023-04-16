@@ -17,7 +17,7 @@ const Line = ({x, y, title}) => {
             layout={{
                 title: `<b>${title}</b>`,
                 font: {
-                    family: `'Martian Mono', monospace`,
+                    family: `'Space Grotesk', sans-serif`,
                     size: "1rem"
                 },
                 shapes: [
