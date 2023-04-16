@@ -6,10 +6,12 @@ import Filter from "./components/Filter";
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
 import Pie from "./components/graphs/Pie";
+import Summary from './components/graphs/Summary';
 
 
 import csvData from "./data/clean/full.csv";
 import sortObjects from "./utils/sortObject";
+import aggregateColumn from "./utils/aggregateColumn";
 
 function App() {
   const [load, setLoad] = useState(false);
@@ -28,34 +30,10 @@ function App() {
   const [bootcampCountData, setBootcampCountData] = useState([])
 
   const calculateData = (rawData) => {
-    let dateDuration = {}
-    let dateCount = {}
-    let bootcampCount = {}
-    let topicCount = {}
-
-    rawData.forEach((d) => {
-      let convertedDate = `${d.DATE.getFullYear()}-${d.DATE.getMonth() + 1}-${d.DATE.getDate()}`
-      if (convertedDate in dateDuration){
-        dateDuration[convertedDate] += parseInt(d.DURATION);
-      } else {
-        dateDuration[convertedDate] = parseInt(d.DURATION);
-      }
-      if (convertedDate in dateCount){
-        dateCount[convertedDate]++;
-      } else {
-        dateCount[convertedDate] = 1;
-      }
-      if (d.BOOTCAMP in bootcampCount) {
-        bootcampCount[d.BOOTCAMP]++;
-      } else {
-        bootcampCount[d.BOOTCAMP] = 1;
-      }
-      if (d.TOPIC in topicCount){
-        topicCount[d.TOPIC]++;
-      } else {
-        topicCount[d.TOPIC] = 1;
-      }
-    })
+    let dateDuration = aggregateColumn(rawData, "DATE", "sum", "DURATION");
+    let dateCount = aggregateColumn(rawData, "DATE", "count");
+    let bootcampCount = aggregateColumn(rawData, "BOOTCAMP", "count");
+    let topicCount = aggregateColumn(rawData, "TOPIC", "count");
 
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
@@ -68,6 +46,7 @@ function App() {
     }
   }
 
+  // Loads in data upon initial component load
   useEffect(() => {
     d3.csv(csvData).then(rawData => {
       let parsedData = rawData.map(d => {
@@ -82,6 +61,8 @@ function App() {
     })
   }, []);
 
+  // Re-filters data every time the user selects a different bootcamp
+  // Resets the topic when user changes bootcamp back to all
   useEffect(() => {
     if (load) {
       if (currBootcamp == "ALL") {
@@ -89,12 +70,18 @@ function App() {
         calculateData(data);
       } else {
         let filteredData = data.filter(d => d.BOOTCAMP == currBootcamp);
+        
+        // If there is a topic filter, we need to include that as well
+        if (currTopic.length != 0) {
+          filteredData = filteredData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
+        }
+
         calculateData(filteredData)
       }
     }
   }, [currBootcamp])
 
-  
+  // Refilters the data when a new selection of topics is submitted
   useEffect(() => {
     if (load){
       let currData;
@@ -126,19 +113,18 @@ function App() {
       />
       
       <div style={{marginTop: "50px"}}>
-        <div>
-          
-        </div>
+        <Summary
+        />
         <Line
         x={Object.entries(totalWeekCountData).map(d => d[0])}
         y={Object.entries(totalWeekCountData).map(d => d[1])}
         title="Number of Tutoring Sessions per Day"
         />
-        <Pie
+        {/* <Pie
         x={Object.entries(bootcampCountData).map(d => d[0])}
         y={Object.entries(bootcampCountData).map(d => parseInt(d[1]) / 60)}
         title="Number of Sessions per bootcamp"
-        />
+        /> */}
       </div>
       <div>
         <Bar

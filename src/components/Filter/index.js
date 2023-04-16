@@ -4,6 +4,7 @@ import Dropdown from "../Dropdown";
 import Multiselect from "../Multiselect";
 
 import style from "./filter.module.css";
+import menuimg from "../../imgs/menu.svg";
 
 const Filter = ({currBootcamp, allBootcamps, setCurrBootcamp, 
                 currTopic, allTopics, setCurrTopic}) => {
@@ -40,7 +41,7 @@ const Filter = ({currBootcamp, allBootcamps, setCurrBootcamp,
         </div>
     ) : (
         <div className={style.outerContainer} onClick={toggle}>
-            <p className={style.pullDownArrow}>▼</p>
+            <img src={menuimg} className={style.pullDownArrow} />
         </div>
     )
 }
