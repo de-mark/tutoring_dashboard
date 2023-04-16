@@ -16,10 +16,12 @@
 
 body {
     background-image: url("./imgs/background.jpg");
+    padding: 0;
 }
 
 .App {
     width: 95%;
+    height: 100vh;
     background-color: rgba(63, 51, 81,.85);
     margin: 0 auto;
     overflow: hidden;

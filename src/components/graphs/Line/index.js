@@ -23,7 +23,12 @@ const Line = ({x, y, title}) => {
                     }
                 ]}
             layout={{
-                title: `<b>${title}</b>`,
+                title: {
+                    text: `<b>${title}</b>`,
+                    font:{
+                        color: "#FFF"
+                    } 
+                },
                 responsive: true,
                 plot_bgcolor: 'rgba(0, 0, 0, 0)',
                 paper_bgcolor: 'rgba(0, 0, 0, 0)',
@@ -48,12 +53,22 @@ const Line = ({x, y, title}) => {
                 ],
                 yaxis: {
                     autorange: true,
-                    title: 'Number of Sessions (Per Day)',
+                    title: {
+                        text: 'Number of Sessions (Per Day)',
+                        font:{
+                            color: "#FFF"
+                        } 
+                    },
                     gridcolor: 'rgba(0,0,0,.35)',
                     gridwidth: 2
                 },
                 xaxis: {
-                    title: 'Day',
+                    title: {
+                        text: 'Date',
+                        font:{
+                            color: "#FFF"
+                        } 
+                    },
                     autorange: true,
                     showgrid: false,
                     zeroline: false,

@@ -11,6 +11,7 @@ import Summary from './components/graphs/Summary';
 // UTILS functions
 import sortObjects from "./utils/sortObject";
 import aggregateColumn from "./utils/aggregateColumn";
+import translateTopic from "./utils/translateTopic";
 
 // Data
 import csvData from "./data/clean/full.csv";
@@ -121,14 +122,17 @@ function App() {
       />
       
       <div style={{display: "flex", justifyContent: "space-evenly", alignItems:"center", textAlign:"center", marginTop: "30px", width: "100%"}}>
-        <Summary
-        bootcamp={currBootcamp}
-        totalStudents={Object.keys(countStudents).length}
-        totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
-        />
+        <div style={{width: "20%"}}>
+          <Summary
+          bootcamp={currBootcamp}
+          totalStudents={Object.keys(countStudents).length}
+          totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
+          />
+        </div>
+        
         <div style={{width: "75%"}}>
           <Bar
-          x={Object.keys(filteredTopicCount)}
+          x={Object.keys(filteredTopicCount).map((t) => translateTopic(t))}
           y={Object.values(filteredTopicCount)}
           title="Number of Sessions Held Per Topic"
           />
