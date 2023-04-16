@@ -1,17 +1,20 @@
 import * as d3 from "d3";
 import { useEffect, useState } from "react";
 
+// COMPONENTS
 import Filter from "./components/Filter";
-
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
 import Pie from "./components/graphs/Pie";
 import Summary from './components/graphs/Summary';
 
-
-import csvData from "./data/clean/full.csv";
+// UTILS functions
 import sortObjects from "./utils/sortObject";
 import aggregateColumn from "./utils/aggregateColumn";
+
+// Data
+import csvData from "./data/clean/full.csv";
+
 
 function App() {
   const [load, setLoad] = useState(false);
@@ -117,7 +120,7 @@ function App() {
       setCurrTopic={setCurrTopic}
       />
       
-      <div style={{marginTop: "50px"}}>
+      <div style={{display: "flex", justifyContent: "space-evenly", alignItems:"center", textAlign:"center", marginTop: "50px", width: "100%"}}>
         <Summary
         bootcamp={currBootcamp}
         totalStudents={Object.keys(countStudents).length}
@@ -130,7 +133,7 @@ function App() {
         title="Number of Sessions Held Per Topic"
         />
       </div>
-      <div>
+      <div style={{width: "100%"}}>
         <Line
         x={Object.entries(totalWeekCountData).map(d => d[0])}
         y={Object.entries(totalWeekCountData).map(d => d[1])}

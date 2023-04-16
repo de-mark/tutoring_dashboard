@@ -16,6 +16,7 @@ const Line = ({x, y, title}) => {
                 ]}
             layout={{
                 title: `<b>${title}</b>`,
+                responsive: true,
                 font: {
                     family: `'Space Grotesk', sans-serif`,
                     size: "1rem"
@@ -78,7 +79,9 @@ const Line = ({x, y, title}) => {
                     type: 'date'
                 }
             }}
-            responsive={true}
+            useResizeHandler={true}
+            style={{width:"100%", height:"100%"}}
+            // responsive={true}
         />
     )
 }
