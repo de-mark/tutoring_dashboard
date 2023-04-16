@@ -109,7 +109,6 @@ function App() {
     }
   }, [currTopic]);
 
-
   return load ? (
     <div className="App">
       <Filter
