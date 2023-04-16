@@ -113,7 +113,6 @@ function App() {
         calculateData(currData);
       } else {
         let filteredData = currData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
-        console.log(filteredData)
         if (filteredData.length == 0) {
           alert("No data found for filter; resetting filters");
           setCurrTopic([]);

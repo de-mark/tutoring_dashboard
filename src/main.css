@@ -21,10 +21,9 @@ body {
 
 .App {
     width: 95%;
-    height: 100vh;
     background-color: rgba(63, 51, 81,.85);
     margin: 0 auto;
-    overflow: hidden;
+    margin-bottom: 50px;
 }
 
 /* 
@@ -39,18 +38,6 @@ g.button rect {
 g.button:hover rect {
     fill: rgba(63, 51, 81,.85) !important;
     transition-duration: .5s;
-}
-
-/*
---------------------------------------------
-MEDIA QUERIES
---------------------------------------------
-*/
-
-@media screen and (max-width: 950px) {
-.App {
-    height: auto;
-}
 }
 
 
@@ -70,3 +57,28 @@ ANIMATIONS
     }
 }
 
+/*
+---------------------------------------------
+SCROLLBAR
+---------------------------------------------
+*/
+/* Firefox */
+* {
+scrollbar-width: auto;
+scrollbar-color: #3f3351 #000000;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+width: 20px;
+}
+
+*::-webkit-scrollbar-track {
+background: #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+background-color: #3f3351;
+border-radius: 10px;
+border: none;
+}
