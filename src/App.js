@@ -86,6 +86,13 @@ function App() {
           filteredData = filteredData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
         }
 
+        if (filteredData.length == 0) {
+          alert("No data found for filter; resetting filters");
+          setCurrTopic([]);
+          setCurrBootcamp("ALL");
+          filteredData = data;
+        } 
+
         calculateData(filteredData)
       }
     }
@@ -106,6 +113,13 @@ function App() {
         calculateData(currData);
       } else {
         let filteredData = currData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
+        console.log(filteredData)
+        if (filteredData.length == 0) {
+          alert("No data found for filter; resetting filters");
+          setCurrTopic([]);
+          setCurrBootcamp("ALL");
+          calculateData(data);
+        }
         calculateData(filteredData);
       }
     }
