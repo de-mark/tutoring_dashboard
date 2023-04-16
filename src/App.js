@@ -93,6 +93,7 @@ function App() {
     }
   }, [currBootcamp])
 
+  
   useEffect(() => {
     if (load){
       let currData;
@@ -106,13 +107,11 @@ function App() {
         calculateData(currData);
       } else {
         let filteredData = currData.filter(d => currTopic.indexOf(d.TOPIC) != -1);
-        // currTopic.forEach((topic) => {
-        //   filteredData = filteredData.filter(d => d.TOPIC == topic);
-        // });
         calculateData(filteredData);
       }
     }
   }, [currTopic]);
+
 
   return load ? (
     <div className="App">

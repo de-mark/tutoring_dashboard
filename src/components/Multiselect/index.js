@@ -12,6 +12,9 @@ const Multiselect = ({selected, options, setValue}) => {
     const [localSelected, setLocalSelected] = useState([]);
 
     const toggleOpen = () => {
+        if (selected.length == 0) {
+            setLocalSelected([]);
+        }
         setIsOpen(!isOpen);
     }
 
