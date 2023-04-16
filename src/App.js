@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
-import Pie from "./components/graphs/Pie";
 import Summary from './components/graphs/Summary';
 
 // UTILS functions
 import sortObjects from "./utils/sortObject";
+import getMedian from "./utils/getMedian";
 import aggregateColumn from "./utils/aggregateColumn";
 import translateTopic from "./utils/translateTopic";
 
@@ -127,6 +127,10 @@ function App() {
           bootcamp={currBootcamp}
           totalStudents={Object.keys(countStudents).length}
           totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
+          medianDuration={getMedian(Object.values(totalWeekDurationData))}
+          medianStudent={getMedian(Object.values(countStudents))}
+          maxStudent={Math.max(...Object.values(countStudents))}
+          maxDuration={Math.max(...Object.values(totalWeekDurationData))}
           />
         </div>
         
