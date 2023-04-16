@@ -3,7 +3,7 @@ import {useState} from "react";
 import style from "./dropdown.module.css";
 import magnifyingGlassImage from "../../imgs/magnifying_glass_icon.svg";
 
-const Dropdown = ({selected, options, setValue}) => {
+const Dropdown = ({label, selected, options, setValue}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -19,7 +19,7 @@ const Dropdown = ({selected, options, setValue}) => {
         <div className={style.container}>
             <div className={style.top} onClick={toggleOpen}>
                 <div>
-                    {selected}
+                    <b>{label}:</b> {selected}
                 </div>
                 <div className={isOpen ? "" : style.arrow}>
                     {isOpen ? "" : <img src={magnifyingGlassImage}/>}

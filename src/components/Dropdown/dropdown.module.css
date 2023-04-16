@@ -43,18 +43,3 @@
 .closed {
     display: none;
 }
-
-/*
----------------------------------------------
-ANIMATIONS
----------------------------------------------
-*/
-
-@keyframes arrowMove {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-5px);
-    }
-}

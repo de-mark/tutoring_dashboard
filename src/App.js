@@ -1,8 +1,7 @@
 import * as d3 from "d3";
 import { useEffect, useState } from "react";
 
-import Dropdown from "./components/Dropdown";
-import Multiselect from "./components/Multiselect";
+import Filter from "./components/Filter";
 
 import Bar from './components/graphs/Bar';
 import Line from './components/graphs/Line';
@@ -20,6 +19,7 @@ function App() {
 
   const [currTopic, setCurrTopic] = useState([]);
   const [allTopics, setAllTopics] = useState([]);
+  const [filteredTopicCount, setFilteredTopicCount] = useState({});
 
   const [data, setData] = useState([]);
 
@@ -60,7 +60,8 @@ function App() {
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
     setBootcampCountData(bootcampCount);
-    setAllTopics([...Object.keys(topicCount)])
+    setAllTopics([...Object.keys(topicCount)]);
+    setFilteredTopicCount(topicCount);
 
     if (!load) {
       setAllBootcamps([...allBootcamps, ...Object.keys(bootcampCount)]);
@@ -115,24 +116,14 @@ function App() {
 
   return load ? (
     <div className="App">
-      <div style={{display: "flex", justifyContent: "space-evenly", alignContent: "center"}}>
-        <div style={{width: "30%"}}>
-          <h4>Bootcamp</h4>
-          <Dropdown
-          selected={currBootcamp}
-          options={allBootcamps}
-          setValue={setCurrBootcamp}
-          />
-        </div>
-        <div style={{width: "30%"}}>
-          <h4>Topic</h4>
-          <Multiselect
-          selected={currTopic} 
-          options={allTopics}
-          setValue={setCurrTopic}
-          />
-        </div>
-      </div>
+      <Filter
+      currBootcamp={currBootcamp}
+      allBootcamps={allBootcamps}
+      setCurrBootcamp={setCurrBootcamp} 
+      currTopic={currTopic} 
+      allTopics={allTopics} 
+      setCurrTopic={setCurrTopic}
+      />
       
       <div style={{marginTop: "50px"}}>
         <div>
@@ -147,6 +138,13 @@ function App() {
         x={Object.entries(bootcampCountData).map(d => d[0])}
         y={Object.entries(bootcampCountData).map(d => parseInt(d[1]) / 60)}
         title="Number of Sessions per bootcamp"
+        />
+      </div>
+      <div>
+        <Bar
+        x={Object.keys(filteredTopicCount)}
+        y={Object.values(filteredTopicCount)}
+        title="Number of Sessions Held Per Topic"
         />
       </div>
     </div>

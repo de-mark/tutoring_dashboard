@@ -3,6 +3,7 @@
 :root {
     --main-font-fam: 'Space Grotesk', sans-serif; 
     --main-font-size: 16px;
+    --arrow-animation: arrowMove 1s infinite alternate;
 }
 
 * {
@@ -11,4 +12,19 @@
     box-sizing: border-box;
 }
 
+
+/*
+---------------------------------------------
+ANIMATIONS
+---------------------------------------------
+*/
+
+@keyframes arrowMove {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
 

@@ -7,7 +7,12 @@ const Bar = ({x, y, title}) => {
                     {
                         x: x,
                         y: y,
-                        type: 'bar'
+                        type: 'bar',
+                        transforms: [{
+                            type: 'sort',
+                            target: 'y',
+                            order: 'descending'
+                        }]
                     }
                 ]}
             layout={{

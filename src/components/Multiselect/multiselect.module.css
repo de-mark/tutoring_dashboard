@@ -26,7 +26,7 @@
 .arrow:hover, 
 .clearContainer:hover, 
 .filterContainer:hover {
-    animation: arrowMove 1s infinite alternate;
+    animation: var(--arrow-animation);
 }
 
 
@@ -86,19 +86,4 @@
 
 .filterContainer img {
     height: 1rem;
-}
-
-/*
----------------------------------------------
-ANIMATIONS
----------------------------------------------
-*/
-
-@keyframes arrowMove {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-5px);
-    }
 }

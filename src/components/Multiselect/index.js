@@ -7,7 +7,7 @@ import cancelImage from "../../imgs/cancel.svg";
 
 import style from './multiselect.module.css';
 
-const Multiselect = ({selected, options, setValue}) => {
+const Multiselect = ({label, selected, options, setValue}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [localSelected, setLocalSelected] = useState([]);
 
@@ -41,6 +41,7 @@ const Multiselect = ({selected, options, setValue}) => {
         <div className={style.container}>
             <div className={style.top} onClick={toggleOpen}>
                 <div>
+                    <b>{label}: </b>
                     {selected.length >= 1 ? selected.map((s, idx) => idx != selected.length - 1 ? 
                                                         `${translateTopic(s)}, ` : `${translateTopic(s)}`) :"ALL"
                     }
