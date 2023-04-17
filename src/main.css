@@ -16,6 +16,8 @@
 
 body {
     background-image: url("./imgs/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 0;
 }
 
