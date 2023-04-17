@@ -2,7 +2,7 @@
 
 ## Quick Links
 
-[Live]()
+[Live](https://de-mark.github.io/tutoring_dashboard/)
 
 [Data Cleaning - Python](https://github.com/de-mark/info/blob/main/src/data/data_cleaning.ipynb)
 
