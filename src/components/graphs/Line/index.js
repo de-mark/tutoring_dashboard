@@ -53,6 +53,7 @@ const Line = ({x, y, title}) => {
                 ],
                 yaxis: {
                     autorange: true,
+                    // range: [0, Math.max(...y)],
                     title: {
                         text: 'Number of Sessions (Per Day)',
                         font:{
