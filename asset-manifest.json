@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/tutoring_dashboard/static/css/main.c8f24536.css",
-    "main.js": "/tutoring_dashboard/static/js/main.4a9c4ea6.js",
+    "main.js": "/tutoring_dashboard/static/js/main.f6503e4d.js",
     "static/media/background.jpg": "/tutoring_dashboard/static/media/background.3340def131dee1e421b3.jpg",
-    "static/media/full.csv": "/tutoring_dashboard/static/media/full.966a797a1c4e6af4b1cd.csv",
+    "static/media/full.csv": "/tutoring_dashboard/static/media/full.4f9b4d13023c4d01ccbd.csv",
     "static/media/cancel.svg": "/tutoring_dashboard/static/media/cancel.1af3c945534f64d0501d3fb75231181c.svg",
     "index.html": "/tutoring_dashboard/index.html",
     "static/media/magnifying_glass_icon.svg": "/tutoring_dashboard/static/media/magnifying_glass_icon.85df26c0b122632529f6b44e8a83fbc3.svg",
     "main.c8f24536.css.map": "/tutoring_dashboard/static/css/main.c8f24536.css.map",
-    "main.4a9c4ea6.js.map": "/tutoring_dashboard/static/js/main.4a9c4ea6.js.map"
+    "main.f6503e4d.js.map": "/tutoring_dashboard/static/js/main.f6503e4d.js.map"
   },
   "entrypoints": [
     "static/css/main.c8f24536.css",
-    "static/js/main.4a9c4ea6.js"
+    "static/js/main.f6503e4d.js"
   ]
 }
