@@ -30,6 +30,9 @@ function App() {
   const [allTopics, setAllTopics] = useState([]);
   const [filteredTopicCount, setFilteredTopicCount] = useState({});
 
+  // ***********************************************************
+  const [overallTotalHoursTutored, setOverallTotalHoursTutored] = useState();
+
   const [totalWeekDurationData, setTotalWeekDurationData] = useState({});
   const [totalWeekCountData, setTotalWeekCountData] = useState({});
   const [bootcampCountData, setBootcampCountData] = useState([])
@@ -41,6 +44,16 @@ function App() {
     let bootcampCount = aggregateColumn(rawData, "BOOTCAMP", "count");
     let topicCount = aggregateColumn(rawData, "TOPIC", "count");
     let studentCount = aggregateColumn(rawData, "ID", "count");
+
+    let totalDuration = 0;
+
+    rawData.map(d => {
+      totalDuration += parseFloat(d.DURATION);
+    })
+
+    setOverallTotalHoursTutored(totalDuration);
+
+    console.log(totalDuration);
 
     setTotalWeekDurationData(sortObjects(dateDuration));
     setTotalWeekCountData(sortObjects(dateCount));
@@ -139,6 +152,7 @@ function App() {
         <div className={style.summaryContainer}>
           <Summary
           bootcamp={currBootcamp}
+          totalOverallHoursTutored={overallTotalHoursTutored}
           totalStudents={Object.keys(countStudents).length}
           totalSessions={Object.values(countStudents).reduce((a,b) => a+b, 0)}
           medianDuration={getMedian(Object.values(totalWeekDurationData))}

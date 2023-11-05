@@ -1,6 +1,6 @@
 import style from './summary.module.css';
 
-const Summary = ({ bootcamp, totalStudents, totalSessions, 
+const Summary = ({ bootcamp, totalOverallHoursTutored, totalStudents, totalSessions, 
     medianDuration, medianStudent, maxStudent, maxDuration }) => {
     const getHoursMins = (mins) => {
         return {
@@ -10,6 +10,7 @@ const Summary = ({ bootcamp, totalStudents, totalSessions,
     }
     
     // Time is measured in minutes, so we just have to translate into hours for both
+    let {hours:overallHours, minutes:overallMinutes} = getHoursMins(totalOverallHoursTutored);
     let {hours:medianHours, minutes:medianMinutes} = getHoursMins(medianDuration);
     let {hours:maxHours, minutes:maxMinutes} = getHoursMins(maxDuration);
 
@@ -18,6 +19,7 @@ const Summary = ({ bootcamp, totalStudents, totalSessions,
             <h3><b>{bootcamp.replace("_", " ")}</b> Bootcamp{bootcamp == "ALL" ? "s" : ""}</h3>
             <p><b>Total Students</b> {totalStudents.toLocaleString()}</p>
             <p><b>Total Sessions</b> {totalSessions.toLocaleString()}</p>
+            <p><b>Total Time Tutored</b> {overallHours.toLocaleString()} h. {overallMinutes} min.</p>
             <p><b>Median Time (Per Day):</b> {medianHours} h. {medianMinutes} min.</p>
             <p><b>Median Sessions (Per Student):</b> {medianStudent}</p>
             <p><b>Max Sessions (Per Student):</b> {maxStudent}</p>
