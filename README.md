@@ -10,7 +10,7 @@
 
 ## Last Batch Upload
 
-01/13/2023
+01/24/2024 (Final; No longer tutoring)
 
 ## Description
 
